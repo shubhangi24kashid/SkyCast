@@ -28,6 +28,9 @@ def process_inputs(inputs):
 	IQR = Q3 - Q1
 	df3 = df3[~((df3 < (Q1 - 1.5 * IQR)) | (df3 > (Q3 + 1.5 * IQR))).any(axis=1)]
 
+	df3['precipitation'] = pd.to_numeric(df3['precipitation'], errors='coerce')
+	df3['wind'] = pd.to_numeric(df3['wind'], errors='coerce')
+
 	# Handling skewed distributions
 	df3["precipitation"] = np.sqrt(df3["precipitation"])
 	df3["wind"] = np.sqrt(df3["wind"])
